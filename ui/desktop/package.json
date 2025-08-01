@@ -10,9 +10,9 @@
   "scripts": {
     "typecheck": "tsc --noEmit",
     "generate-api": "openapi-ts",
-    "start-gui": "npm run generate-api && electron-forge start",
-    "start": "cd ../.. && just run-ui",
-    "start:test-error": "GOOSE_TEST_ERROR=true electron-forge start",
+    "start-gui": "node init && npm run generate-api && electron-forge start",
+    "start": "node init && cd ../.. && just run-ui",
+    "start:test-error": "node init && GOOSE_TEST_ERROR=true electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "bundle:default": "node scripts/prepare-platform-binaries.js && npm run make && (cd out/Goose-darwin-arm64 && ditto -c -k --sequesterRsrc --keepParent Goose.app Goose.zip) || echo 'out/Goose-darwin-arm64 not found; either the binary is not built or you are not on macOS'",
@@ -35,7 +35,7 @@
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage",
     "prepare": "cd ../.. && husky install",
-    "start-alpha-gui": "ALPHA=true npm run start-gui"
+    "start-alpha-gui": "node init && ALPHA=true npm run start-gui"
   },
   "dependencies": {
     "@ai-sdk/openai": "^0.0.72",
